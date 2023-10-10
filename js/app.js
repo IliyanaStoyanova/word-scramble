@@ -25,12 +25,12 @@ const clearClass = () => {
 
 const initTimer = (maxTimer, currentWord) => {
   clearInterval(timer);
-  clearClass();
   timer = setInterval(() => {
     if(maxTimer>0) {
       maxTimer--;
       return time.innerText = maxTimer;
     }
+    clearClass();
     addClass(info, 'error');
     return info.innerText = `Time off! ${currentWord.toUpperCase()} was the correct word.`;
   }, 1000);
@@ -46,11 +46,15 @@ function showWord() {
     let j = Math.floor(Math.random() * (currentWord.length));
     [currentWord[i], currentWord[j]] = [currentWord[j], currentWord[i]];
   }  
-  clearClass();
-  addClass(info, 'hide');
   word.innerText = currentWord.join("");
   hint.innerText = randomWord.hint;
   userWord.value = '';
+}
+
+function refreshWord () {
+  clearClass();
+  showWord();
+  addClass(info, 'hide');
 }
 
 function isWord() {
@@ -72,5 +76,5 @@ function isWord() {
 }
 
 showWord();
-newWord.addEventListener('click', showWord);
+newWord.addEventListener('click', refreshWord);
 checkWord.addEventListener('click', isWord);
