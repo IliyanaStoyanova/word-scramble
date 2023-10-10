@@ -11,8 +11,8 @@ const initTimer = (maxTimer, currentWord) => {
   clearInterval(timer);
   timer = setInterval(() => {
     if(maxTimer>0) {
-      time.innerText = maxTimer;
-      return maxTimer--;
+      maxTimer--;
+      return time.innerText = maxTimer;
     }
     return error.innerText = `Time off! ${currentWord.toUpperCase()} was the correct word.`;
   }, 1000);
