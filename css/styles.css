@@ -5,6 +5,14 @@
   text-align: center;
 }
 
+.hide {
+  display: none;
+}
+
 .error {
   color: red;
+}
+
+.success {
+  color: green;
 }
