@@ -1,15 +1,18 @@
 import { words } from './words.js';
 
 const word = document.querySelector('.word');
-const hint = document.querySelector('.hint');
+const hint = document.querySelector('.hint span');
 const time = document.querySelector('.time b');
 const error = document.querySelector('.error p');
+const newWord = document.querySelector('.new-word');
+let timer;
 
 const initTimer = (maxTimer, currentWord) => {
-  setInterval(() => {
+  clearInterval(timer);
+  timer = setInterval(() => {
     if(maxTimer>0) {
-      maxTimer--;
-      return time.innerText = maxTimer;
+      time.innerText = maxTimer;
+      return maxTimer--;
     }
     return error.innerText = `Time off! ${currentWord.toUpperCase()} was the correct word.`;
   }, 1000);
@@ -26,8 +29,9 @@ function showWord() {
     [currentWord[i], currentWord[j]] = [currentWord[j], currentWord[i]];
   }
   word.innerText = currentWord.join("");
-  hint.insertAdjacentHTML('beforeend',randomWord.hint);
+  hint.innerText = randomWord.hint;
 }
 
-
 showWord();
+
+newWord.addEventListener('click', showWord);
